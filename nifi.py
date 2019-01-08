@@ -44,15 +44,10 @@ def test():
         
         drone.takeoff()
         sleep(5)
-        drone.clockwise(30)
-        sleep(5)
-        drone.clockwise(30)
-        drone.down(10)
-        sleep(2)
-        drone.up(10)
-        sleep(2)
-        
-        while True:
+        drone.up(50) 
+        counter = 0
+ 
+        while counter < 600:
             for frame in container.decode(video=0):
                 if 0 < frame_skip:
                     frame_skip = frame_skip - 1
@@ -62,16 +57,17 @@ def test():
                 uuid2 = '{0}'.format(strftime("%Y%m%d%H%M%S",gmtime()))
                 filename = '/Volumes/TSPANN/projects/nifi-drone/images/fly_image_{0}.jpg'.format(uuid2)
                 cv2.imwrite(filename, image)
-                cv2.imshow('Original', image)
-                cv2.waitKey(1)
+                #cv2.imshow('Original', image)
+                #cv2.waitKey(1)
                 if frame.time_base < 1.0/60:
                     time_base = 1.0/60
                 else:
                     time_base = frame.time_base
                 frame_skip = int((time.time() - start_time)/time_base)
-                
+            sleep(1)
+            counter = counter + 1    
+        sleep(1)
         drone.land()
-        sleep(5)
     except Exception as ex:
         print(ex)
     finally:
