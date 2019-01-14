@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.2">
+    <description></description>
+    <groupId>de774dae-0167-1000-1c3a-e4f4f72868f0</groupId>
+    <name>DroneCloud</name>
+    <snippet>
+        <connections>
+            <id>8f9387fa-0998-3588-0000-000000000000</id>
+            <parentGroupId>0bc5cd93-d5e9-3d73-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>32cd7db5-8ab1-3c15-0000-000000000000</groupId>
+                <id>4b17b0a1-969b-33fe-0000-000000000000</id>
+                <type>INPUT_PORT</type>
+                <versionedComponentId>4b17b0a1-969b-33fe-b9be-26c92a3f09c4</versionedComponentId>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <source>
+                <groupId>0bc5cd93-d5e9-3d73-0000-000000000000</groupId>
+                <id>864da475-10e4-3596-0000-000000000000</id>
+                <type>INPUT_PORT</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <controllerServices>
+            <id>1904c162-b031-3618-0000-000000000000</id>
+            <parentGroupId>0bc5cd93-d5e9-3d73-0000-000000000000</parentGroupId>
+            <bundle>
+                <artifact>nifi-hwx-schema-registry-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.8.0.3.3.0.0-165</version>
+            </bundle>
+            <comments></comments>
+            <descriptors>
+                <entry>
+                    <key>url</key>
+                    <value>
+                        <name>url</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>cache-size</key>
+                    <value>
+                        <name>cache-size</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>cache-expiration</key>
+                    <value>
+                        <name>cache-expiration</name>
+                    </value>
+                </entry>
+            </descriptors>
+            <name>HWX Schema Registry Princeton1</name>
+            <persistsState>false</persistsState>
+            <properties>
+                <entry>
+                    <key>url</key>
+                    <value>http://princeton0.field.hortonworks.com:7788/api/v1</value>
+                </entry>
+                <entry>
+                    <key>cache-size</key>
+                    <value>1000</value>
+                </entry>
+                <entry>
+                    <key>cache-expiration</key>
+                    <value>1 hour</value>
+                </entry>
+            </properties>
+            <state>ENABLED</state>
+            <type>org.apache.nifi.schemaregistry.hortonworks.HortonworksSchemaRegistry</type>
+        </controllerServices>
+        <controllerServices>
+            <id>54856838-843e-3684-0000-000000000000</id>
+            <parentGroupId>0bc5cd93-d5e9-3d73-0000-000000000000</parentGroupId>
+            <bundle>
+                <artifact>nifi-record-serialization-services-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.8.0.3.3.0.0-165</version>
+            </bundle>
+            <comments></comments>
+            <descriptors>
+                <entry>
+                    <key>Schema Write Strategy</key>
+                    <value>
+                        <name>Schema Write Strategy</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>schema-access-strategy</key>
+                    <value>
+                        <name>schema-access-strategy</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>schema-registry</key>
+                    <value>
+                        <identifiesControllerService>org.apache.nifi.schemaregistry.services.SchemaRegistry</identifiesControllerService>
+                        <name>schema-registry</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>schema-name</key>
+                    <value>
+                        <name>schema-name</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>schema-version</key>
+                    <value>
+                        <name>schema-version</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>schema-branch</key>
+                    <value>
+                        <name>schema-branch</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>schema-text</key>
+                    <value>
+                        <name>schema-text</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>compression-format</key>
+                    <value>
+                        <name>compression-format</name>
+                    </value>
+                </entry>
+            </descriptors>
+            <name>HDFS AvroRecordSetWriter</name>
+            <persistsState>false</persistsState>
+            <properties>
+                <entry>
+                    <key>Schema Write Strategy</key>
+                    <value>avro-embedded</value>
+                </entry>
+                <entry>
+                    <key>schema-access-strategy</key>
+                    <value>inherit-record-schema</value>
+                </entry>
+                <entry>
+                    <key>schema-registry</key>
+                    <value>1904c162-b031-3618-0000-000000000000</value>
+                </entry>
+                <entry>
+                    <key>schema-name</key>
+                    <value>${schema.name}</value>
+                </entry>
+                <entry>
+                    <key>schema-version</key>
+                </entry>
+                <entry>
+                    <key>schema-branch</key>
+                </entry>
+                <entry>
+                    <key>schema-text</key>
+                    <value>${avro.schema}</value>
+                </entry>
+                <entry>
+                    <key>compression-format</key>
+                    <value>NONE</value>
+                </entry>
+            </properties>
+            <state>ENABLED</state>
+            <type>org.apache.nifi.avro.AvroRecordSetWriter</type>
+        </controllerServices>
+        <inputPorts>
+            <id>864da475-10e4-3596-0000-000000000000</id>
+            <parentGroupId>0bc5cd93-d5e9-3d73-0000-000000000000</parentGroupId>
+            <position>
+                <x>64.85699066444408</x>
+                <y>0.0</y>
+            </position>
+            <comments></comments>
+            <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+            <name>Drone In</name>
+            <state>RUNNING</state>
+            <transmitting>false</transmitting>
+            <type>INPUT_PORT</type>
+        </inputPorts>
+        <processGroups>
+            <id>32cd7db5-8ab1-3c15-0000-000000000000</id>
+            <parentGroupId>0bc5cd93-d5e9-3d73-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>151.0105645633896</y>
+            </position>
+            <versionedComponentId>32cd7db5-8ab1-3c15-943f-dc4972e1b5aa</versionedComponentId>
+            <comments></comments>
+            <contents>
+                <connections>
+                    <id>0ca786aa-487c-303b-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <versionedComponentId>0ca786aa-487c-303b-8618-c25d2292b0eb</versionedComponentId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>32cd7db5-8ab1-3c15-0000-000000000000</groupId>
+                        <id>de619358-2aa9-3dd8-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>de619358-2aa9-3dd8-a816-13d8df1c83f6</versionedComponentId>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <source>
+                        <groupId>32cd7db5-8ab1-3c15-0000-000000000000</groupId>
+                        <id>4b17b0a1-969b-33fe-0000-000000000000</id>
+                        <type>INPUT_PORT</type>
+                        <versionedComponentId>4b17b0a1-969b-33fe-b9be-26c92a3f09c4</versionedComponentId>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>40c663e3-3caa-33c2-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <versionedComponentId>40c663e3-3caa-33c2-bb00-95d685b0cd7b</versionedComponentId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>32cd7db5-8ab1-3c15-0000-000000000000</groupId>
+                        <id>af8bffb7-ebee-3c9b-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>af8bffb7-ebee-3c9b-8df0-8f19b284f87b</versionedComponentId>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>32cd7db5-8ab1-3c15-0000-000000000000</groupId>
+                        <id>de619358-2aa9-3dd8-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>de619358-2aa9-3dd8-a816-13d8df1c83f6</versionedComponentId>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>f6205410-d513-3d12-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <versionedComponentId>f6205410-d513-3d12-a983-d7cb061d12ed</versionedComponentId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>32cd7db5-8ab1-3c15-0000-000000000000</groupId>
+                        <id>a379fad3-03ba-3c0a-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>a379fad3-03ba-3c0a-9d8b-771ef4fbfb64</versionedComponentId>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>32cd7db5-8ab1-3c15-0000-000000000000</groupId>
+                        <id>af8bffb7-ebee-3c9b-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>af8bffb7-ebee-3c9b-8df0-8f19b284f87b</versionedComponentId>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <controllerServices>
+                    <id>30e1957b-ca0b-3207-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <versionedComponentId>30e1957b-ca0b-3207-95c4-8700177a4cb9</versionedComponentId>
+                    <bundle>
+                        <artifact>nifi-record-serialization-services-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.8.0.3.3.0.0-165</version>
+                    </bundle>
+                    <comments></comments>
+                    <descriptors>
+                        <entry>
+                            <key>schema-access-strategy</key>
+                            <value>
+<name>schema-access-strategy</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>schema-registry</key>
+                            <value>
+<identifiesControllerService>org.apache.nifi.schemaregistry.services.SchemaRegistry</identifiesControllerService>
+<name>schema-registry</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>schema-name</key>
+                            <value>
+<name>schema-name</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>schema-version</key>
+                            <value>
+<name>schema-version</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>schema-branch</key>
+                            <value>
+<name>schema-branch</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>schema-text</key>
+                            <value>
+<name>schema-text</name>
+                            </value>
+                        </entry>
+                    </descriptors>
+                    <name>AvroReader</name>
+                    <persistsState>false</persistsState>
+                    <properties>
+                        <entry>
+                            <key>schema-access-strategy</key>
+                            <value>embedded-avro-schema</value>
+                        </entry>
+                        <entry>
+                            <key>schema-registry</key>
+                            <value>1904c162-b031-3618-0000-000000000000</value>
+                        </entry>
+                        <entry>
+                            <key>schema-name</key>
+                            <value>${schema.name}</value>
+                        </entry>
+                        <entry>
+                            <key>schema-version</key>
+                        </entry>
+                        <entry>
+                            <key>schema-branch</key>
+                        </entry>
+                        <entry>
+                            <key>schema-text</key>
+                            <value>${avro.schema}</value>
+                        </entry>
+                    </properties>
+                    <state>ENABLED</state>
+                    <type>org.apache.nifi.avro.AvroReader</type>
+                </controllerServices>
+                <controllerServices>
+                    <id>dfdf3746-faf5-3f23-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <versionedComponentId>dfdf3746-faf5-3f23-8cad-4cf21e4c47fc</versionedComponentId>
+                    <bundle>
+                        <artifact>nifi-hbase_1_1_2-client-service-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.8.0.3.3.0.0-165</version>
+                    </bundle>
+                    <comments></comments>
+                    <descriptors>
+                        <entry>
+                            <key>Hadoop Configuration Files</key>
+                            <value>
+<name>Hadoop Configuration Files</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>kerberos-credentials-service</key>
+                            <value>
+<identifiesControllerService>org.apache.nifi.kerberos.KerberosCredentialsService</identifiesControllerService>
+<name>kerberos-credentials-service</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Kerberos Principal</key>
+                            <value>
+<name>Kerberos Principal</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Kerberos Keytab</key>
+                            <value>
+<name>Kerberos Keytab</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper Quorum</key>
+                            <value>
+<name>ZooKeeper Quorum</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper Client Port</key>
+                            <value>
+<name>ZooKeeper Client Port</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper ZNode Parent</key>
+                            <value>
+<name>ZooKeeper ZNode Parent</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>HBase Client Retries</key>
+                            <value>
+<name>HBase Client Retries</name>
+                            </value>
+                        </entry>
+                        <entry>
+                            <key>Phoenix Client JAR Location</key>
+                            <value>
+<name>Phoenix Client JAR Location</name>
+                            </value>
+                        </entry>
+                    </descriptors>
+                    <name>HBase_1_1_2_ClientService</name>
+                    <persistsState>false</persistsState>
+                    <properties>
+                        <entry>
+                            <key>Hadoop Configuration Files</key>
+                            <value>/etc/hbase/conf/hbase-site.xml,/etc/hadoop/conf/core-site.xml</value>
+                        </entry>
+                        <entry>
+                            <key>kerberos-credentials-service</key>
+                        </entry>
+                        <entry>
+                            <key>Kerberos Principal</key>
+                        </entry>
+                        <entry>
+                            <key>Kerberos Keytab</key>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper Quorum</key>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper Client Port</key>
+                        </entry>
+                        <entry>
+                            <key>ZooKeeper ZNode Parent</key>
+                        </entry>
+                        <entry>
+                            <key>HBase Client Retries</key>
+                            <value>2</value>
+                        </entry>
+                        <entry>
+                            <key>Phoenix Client JAR Location</key>
+                            <value>/usr/hdp/current/phoenix-client/phoenix-client.jar</value>
+                        </entry>
+                    </properties>
+                    <state>ENABLED</state>
+                    <type>org.apache.nifi.hbase.HBase_1_1_2_ClientService</type>
+                </controllerServices>
+                <inputPorts>
+                    <id>4b17b0a1-969b-33fe-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>483.0000276488354</x>
+                        <y>245.01383928444233</y>
+                    </position>
+                    <versionedComponentId>4b17b0a1-969b-33fe-b9be-26c92a3f09c4</versionedComponentId>
+                    <comments></comments>
+                    <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                    <name>Drone In</name>
+                    <state>RUNNING</state>
+                    <type>INPUT_PORT</type>
+                </inputPorts>
+                <processors>
+                    <id>a379fad3-03ba-3c0a-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>412.99996661367913</x>
+                        <y>742.0329127707705</y>
+                    </position>
+                    <versionedComponentId>a379fad3-03ba-3c0a-9d8b-771ef4fbfb64</versionedComponentId>
+                    <bundle>
+                        <artifact>nifi-hbase-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.8.0.3.3.0.0-165</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>record-reader</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.serialization.RecordReaderFactory</identifiesControllerService>
+    <name>record-reader</name>
+</value>
+                            </entry>
+                            <entry>
+<key>HBase Client Service</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.hbase.HBaseClientService</identifiesControllerService>
+    <name>HBase Client Service</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Table Name</key>
+<value>
+    <name>Table Name</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Row Identifier Field Name</key>
+<value>
+    <name>Row Identifier Field Name</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Row Identifier Encoding Strategy</key>
+<value>
+    <name>Row Identifier Encoding Strategy</name>
+</value>
+                            </entry>
+                            <entry>
+<key>hbase-record-null-field-strategy</key>
+<value>
+    <name>hbase-record-null-field-strategy</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Column Family</key>
+<value>
+    <name>Column Family</name>
+</value>
+                            </entry>
+                            <entry>
+<key>hbase-default-vis-string</key>
+<value>
+    <name>hbase-default-vis-string</name>
+</value>
+                            </entry>
+                            <entry>
+<key>put-hb-rec-visibility-record-path</key>
+<value>
+    <name>put-hb-rec-visibility-record-path</name>
+</value>
+                            </entry>
+                            <entry>
+<key>timestamp-field-name</key>
+<value>
+    <name>timestamp-field-name</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Batch Size</key>
+<value>
+    <name>Batch Size</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Complex Field Strategy</key>
+<value>
+    <name>Complex Field Strategy</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Field Encoding Strategy</key>
+<value>
+    <name>Field Encoding Strategy</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>record-reader</key>
+<value>30e1957b-ca0b-3207-0000-000000000000</value>
+                            </entry>
+                            <entry>
+<key>HBase Client Service</key>
+<value>dfdf3746-faf5-3f23-0000-000000000000</value>
+                            </entry>
+                            <entry>
+<key>Table Name</key>
+<value>drone</value>
+                            </entry>
+                            <entry>
+<key>Row Identifier Field Name</key>
+<value>drone_rec_id</value>
+                            </entry>
+                            <entry>
+<key>Row Identifier Encoding Strategy</key>
+<value>String</value>
+                            </entry>
+                            <entry>
+<key>hbase-record-null-field-strategy</key>
+<value>empty-bytes</value>
+                            </entry>
+                            <entry>
+<key>Column Family</key>
+<value>drone</value>
+                            </entry>
+                            <entry>
+<key>hbase-default-vis-string</key>
+                            </entry>
+                            <entry>
+<key>put-hb-rec-visibility-record-path</key>
+                            </entry>
+                            <entry>
+<key>timestamp-field-name</key>
+                            </entry>
+                            <entry>
+<key>Batch Size</key>
+<value>1000</value>
+                            </entry>
+                            <entry>
+<key>Complex Field Strategy</key>
+<value>Text</value>
+                            </entry>
+                            <entry>
+<key>Field Encoding Strategy</key>
+<value>String</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>PutHBaseRecord</name>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>failure</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>RUNNING</state>
+                    <style/>
+                    <type>org.apache.nifi.hbase.PutHBaseRecord</type>
+                </processors>
+                <processors>
+                    <id>af8bffb7-ebee-3c9b-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>424.999936096101</x>
+                        <y>556.0329127707705</y>
+                    </position>
+                    <versionedComponentId>af8bffb7-ebee-3c9b-8df0-8f19b284f87b</versionedComponentId>
+                    <bundle>
+                        <artifact>nifi-standard-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.8.0.3.3.0.0-165</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>record-reader</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.serialization.RecordReaderFactory</identifiesControllerService>
+    <name>record-reader</name>
+</value>
+                            </entry>
+                            <entry>
+<key>record-writer</key>
+<value>
+    <identifiesControllerService>org.apache.nifi.serialization.RecordSetWriterFactory</identifiesControllerService>
+    <name>record-writer</name>
+</value>
+                            </entry>
+                            <entry>
+<key>replacement-value-strategy</key>
+<value>
+    <name>replacement-value-strategy</name>
+</value>
+                            </entry>
+                            <entry>
+<key>/drone_rec_id</key>
+<value>
+    <name>/drone_rec_id</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>record-reader</key>
+<value>30e1957b-ca0b-3207-0000-000000000000</value>
+                            </entry>
+                            <entry>
+<key>record-writer</key>
+<value>54856838-843e-3684-0000-000000000000</value>
+                            </entry>
+                            <entry>
+<key>replacement-value-strategy</key>
+<value>literal-value</value>
+                            </entry>
+                            <entry>
+<key>/drone_rec_id</key>
+<value>${random():mod(900000)}</value>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>UpdateRecord</name>
+                    <relationships>
+                        <autoTerminate>true</autoTerminate>
+                        <name>failure</name>
+                    </relationships>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>RUNNING</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.standard.UpdateRecord</type>
+                </processors>
+                <processors>
+                    <id>de619358-2aa9-3dd8-0000-000000000000</id>
+                    <parentGroupId>32cd7db5-8ab1-3c15-0000-000000000000</parentGroupId>
+                    <position>
+                        <x>421.0000276488354</x>
+                        <y>354.0138392844423</y>
+                    </position>
+                    <versionedComponentId>de619358-2aa9-3dd8-a816-13d8df1c83f6</versionedComponentId>
+                    <bundle>
+                        <artifact>nifi-update-attribute-nar</artifact>
+                        <group>org.apache.nifi</group>
+                        <version>1.8.0.3.3.0.0-165</version>
+                    </bundle>
+                    <config>
+                        <bulletinLevel>WARN</bulletinLevel>
+                        <comments></comments>
+                        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                        <descriptors>
+                            <entry>
+<key>Delete Attributes Expression</key>
+<value>
+    <name>Delete Attributes Expression</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Store State</key>
+<value>
+    <name>Store State</name>
+</value>
+                            </entry>
+                            <entry>
+<key>Stateful Variables Initial Value</key>
+<value>
+    <name>Stateful Variables Initial Value</name>
+</value>
+                            </entry>
+                        </descriptors>
+                        <executionNode>ALL</executionNode>
+                        <lossTolerant>false</lossTolerant>
+                        <penaltyDuration>30 sec</penaltyDuration>
+                        <properties>
+                            <entry>
+<key>Delete Attributes Expression</key>
+                            </entry>
+                            <entry>
+<key>Store State</key>
+<value>Do not store state</value>
+                            </entry>
+                            <entry>
+<key>Stateful Variables Initial Value</key>
+                            </entry>
+                        </properties>
+                        <runDurationMillis>0</runDurationMillis>
+                        <schedulingPeriod>0 sec</schedulingPeriod>
+                        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                        <yieldDuration>1 sec</yieldDuration>
+                    </config>
+                    <executionNodeRestricted>false</executionNodeRestricted>
+                    <name>UpdateAttribute</name>
+                    <relationships>
+                        <autoTerminate>false</autoTerminate>
+                        <name>success</name>
+                    </relationships>
+                    <state>RUNNING</state>
+                    <style/>
+                    <type>org.apache.nifi.processors.attributes.UpdateAttribute</type>
+                </processors>
+            </contents>
+            <name>Drone Server Processing</name>
+            <variables/>
+        </processGroups>
+    </snippet>
+    <timestamp>01/14/2019 19:48:42 UTC</timestamp>
+</template>
